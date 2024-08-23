@@ -1,24 +1,15 @@
 <?php
-// Simula um "banco de dados" com um array
-$database = [];
+// Configurações de conexão com o banco de dados
+$servername = "localhost";
+$username = "root";
+$password = ""; // Senha padrão do MySQL no XAMPP é uma string vazia
+$dbname = "carnes_db"; // Nome do banco de dados
 
-function salvarCarnes($valor_total, $valor_entrada, $parcelas) {
-    global $database;
-    $id = count($database) + 1;
-    $database[$id] = [
-        'total' => $valor_total,
-        'valor_entrada' => $valor_entrada,
-        'parcelas' => $parcelas
-    ];
-    return $id;
-}
+// Criar a conexão
+$conn = new mysqli($servername, $username, $password, $dbname);
 
-function buscarCarnes($id) {
-    global $database;
-    if (isset($database[$id])) {
-        return $database[$id];
-    } else {
-        return ['error' => 'Carnê não encontrado'];
-    }
+// Verificar a conexão
+if ($conn->connect_error) {
+    die("Falha na conexão: " . $conn->connect_error);
 }
 ?>

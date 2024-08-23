@@ -1,21 +1,22 @@
 # Guia
+**1. Abra o Xampp**
+Vá para o Xampp e execute Apache e Mysql
+**2. Clone este repositório no HTDOCS**
+Vá para C:\xampp\htdocs e clone este repositório, ou crie manualmente os arquivos php da lista:
 index.php - Ponto de entrada para todas as requisições.
-carnes.php - Contém a lógica para criação e recuperação de parcelas.
-database.php - Simula o armazenamento em banco de dados.
-
-# Testando API
-**1.Criar um Carnê:**
-Execute o comando:
-curl -X POST http://localhost/index.php?path=criar-carnes -H "Content-Type: application/json" -d '{
-    "valor_total": 100.00,
-    "qtd_parcelas": 12,
-    "data_primeiro_vencimento": "2024-08-01",
-    "periodicidade": "mensal"
-}'
-
-**2.Recuperar Parcelas:**
-Execute o comando:
-curl http://localhost/index.php?path=recuperar-parcelas&id=1
+database.php - Conexão com banco de dados.
+**3. Crie um banco de dados**
+Vá para http://localhost/phpmyadmin/index.php?lang=pt_BR e crie um banco de dados chamado "carnes_db", execute o comando SQL abaixo para criar a tabela:
+CREATE TABLE carnes ( id INT AUTO_INCREMENT PRIMARY KEY, valor_total DECIMAL(10, 2) NOT NULL, qtd_parcelas INT NOT NULL, data_primeiro_vencimento DATE NOT NULL, periodicidade ENUM('mensal', 'semanal') NOT NULL, valor_entrada DECIMAL(10, 2) DEFAULT 0 );
+**4. Postman**
+Abra o postman e configure uma requisição POST com a URL:http://localhost/desafio-tenex-php/index.php?path=criar-carnes e um GET com a URL:http://localhost/desafio-tenex-php/index.php?path=recuperar-parcelas&id=1
+Exemplo execução de POST:
+{
+  "valor_total": 100.00,
+  "qtd_parcelas": 12,
+  "data_primeiro_vencimento": "2024-08-01",
+  "periodicidade": "mensal"
+}
 
 
 # desafio-tenex-php
